@@ -16,7 +16,6 @@ After researching, the issue was resolved by including the --host and --port opt
 2. Query Verification
 After the database was loaded, the following commands were executed to verify the data:
 javascript
-Copy code
 use AAC
 db.animals.countDocuments()
 Confirmed that the database contained 10,000 records.
@@ -25,19 +24,16 @@ Single Field Index:
 Created an index on the breed field to optimize queries filtering by breed.
 Verified the index usage with the explain function using:
 javascript
-Copy code
 db.animals.find({ breed: "Labrador Retriever Mix" }).explain("executionStats")
 Compound Index:
 Created a compound index on breed and outcome_type fields to optimize queries filtering by multiple criteria.
 Tested the compound index with:
 javascript
-Copy code
 db.animals.find({ breed: "Labrador Retriever Mix", outcome_type: "Transfer" }).explain("executionStats")
 4. Authentication Setup
 Creating a New User:
 Added a user (aacuser) with a readWrite role restricted to the AAC database using:
 javascript
-Copy code
 db.createUser({
   user: "aacuser",
   pwd: "noah123",
@@ -47,13 +43,11 @@ db.createUser({
 })
 Faced an issue where the user already existed. Researched and updated the password with:
 javascript
-Copy code
 db.updateUser("aacuser", { pwd: "noah123" })
 Verification:
 Tested the aacuser login in a second terminal session.
 Verified the connection with:
 javascript
-Copy code
 db.runCommand({ connectionStatus: 1 })
 Confirmed limited access by listing accessible databases (AAC) and testing queries.
 Deliverables
